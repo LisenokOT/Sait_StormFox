@@ -1,0 +1,9 @@
+
+.main_block{
+    background-color: var(--background-color-main);
+    display: grid;
+    grid-template-columns: 20vw 60vw 20vw;
+    height: 85vh;
+    overflow: overlay;
+}
+

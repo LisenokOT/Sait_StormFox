@@ -1,0 +1,41 @@
+  .posts {
+    background-color: var(--color-main);
+    color: var(--color-text);
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 2%;
+  }
+  
+  .post {
+    font-size: 17px;
+    color: var(--color-text);
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+  
+  .post_new {
+    font-size: 17px;
+    width: 100%;
+  }
+  
+  .clic_none {
+    visibility: hidden;
+    display: none;
+  }
+  .clic{
+    background-color: var(--button-color-main);
+    color: var(--color-button-text);
+    border: none;
+    padding: 8px 16px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  .clic:hover{
+    background-color: var(--button-color-main-hover);
+  }

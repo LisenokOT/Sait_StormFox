@@ -1,0 +1,28 @@
+# Используем образ Node.js на базе Alpine 3.14 для уменьшения размера контейнера
+FROM node:alpine3.14
+
+# Устанавливаем рабочую директорию
+WORKDIR /stormfox
+
+# Копируем файлы package.json и package-lock.json
+COPY web-site/stormfox/package*.json ./
+
+# Устанавливаем зависимости, копируем все файлы проекта, очищаем кеш npm и собираем проект в одной команде, чтобы уменьшить количество слоев
+RUN npm install --no-optional && \
+    npm ci --only=production && \
+    npm cache clean --force && \
+    rm -rf /tmp/* && \
+    rm -rf /var/cache/apk/* && \
+    rm -rf ~/.npm
+
+# Копируем файлы проекта
+COPY web-site/stormfox/ .
+
+# Собираем проект
+RUN npm run build
+
+# Запускаем сервер на порту 10010
+EXPOSE 3000
+
+# Запускаем приложение
+CMD ["npm", "start"]

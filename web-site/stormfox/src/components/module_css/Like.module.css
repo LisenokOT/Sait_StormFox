@@ -1,0 +1,7 @@
+.main {
+    
+  background-color: var(--background-color-main);
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+  }

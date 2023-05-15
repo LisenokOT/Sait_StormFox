@@ -1,0 +1,94 @@
+version: "3.9"
+
+services:
+
+  postgres:
+    hostname: stormfox.postgres
+    build: 
+      context: ./
+      dockerfile: postgresql/Dockerfile.postgres
+    volumes:
+      - ./postgresql/data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    env_file:
+      - .env
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d ${DB_NAME} -U ${POSTGRES_USER}"]
+      interval: 1m
+      timeout: 10s
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 2s
+        max_attempts: 3
+        window: 10m
+    
+  smm:
+    hostname: smm.planer
+    build:
+      context: ./
+      dockerfile: smm/Dockerfile.smm
+    command: gunicorn --bind 0.0.0.0:10200 wsgi:app
+    ports:
+      - 10200:10200
+    stdin_open: true
+    tty: true
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "10200"]
+      interval: 2m
+      timeout: 10s
+    deploy:
+      resources:
+        limits:
+          cpus: '0.3'
+          memory: '3g'
+      restart_policy:
+        condition: on-failure
+        delay: 2s
+        max_attempts: 3
+        window: 2m
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  web:
+    hostname: stormfox.web
+    build:
+      context: ./
+      dockerfile: web-site/Dockerfile.web-site
+    healthcheck:
+      test: curl -sS http://stormfox.web:3000 || echo 1
+      interval: 1m
+      timeout: 10s
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 2s
+        max_attempts: 3
+        window: 120s
+    depends_on:
+      smm:
+        condition: service_healthy
+
+  nginx:
+    build:
+      context: ./
+      dockerfile: nginx/Dockerfile.nginx
+    ports:
+      - '10000:10000'
+    healthcheck:
+      test: ["CMD", "service", "nginx", "status"]
+      interval: 1m
+      timeout: 10s
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 2s
+        max_attempts: 3
+        window: 10m
+    depends_on:
+      web:
+        condition: service_healthy

@@ -1,0 +1,37 @@
+/* Хранение переменных для тем проекта */
+
+/* ----------------------Темная тема---------------------- */
+html[data-theme='dark']{
+    --background-color-main: #353333;
+    --button-color-main:#939caa;
+    --button-color-main-hover:#bfd5e6;
+    --color-button-text:#000000;
+    --color-main:rgb(70, 70, 70);
+    --color-text: #fff;
+    --color-register-main:#5a5a5a;
+    --background-color-menu:#414140;
+    --background-color-header:#272727;
+    --color-text-header: #cccccc;
+    --color-text-header-active: rgb(173, 156, 120);
+    --background-elem-main:#292929;
+    --background-elem-main-active:#585858;
+}
+/* Применяется как var(переменная) */
+
+/* ----------------------Светлая тема---------------------- */
+html[data-theme='light']{
+    --background-color-main: rgb(224, 223, 222);
+    --button-color-main:#484e58;
+    --button-color-main-hover:#172027;
+    --color-button-text:#fff;
+    --color-main:rgb(237, 235, 233);
+    --color-text: #000000;
+    --color-register-main:#B6B5B4;
+    --background-color-menu:#c5c4c3;
+    --background-color-header:rgb(237, 235, 233);
+    --color-text-header: #333333;
+    --color-text-header-active: rgb(119, 106, 81);
+    --background-elem-main:#a1a0a0;
+    --background-elem-main-active:rgb(104, 104, 104);
+    }
+

@@ -1,0 +1,16 @@
+.elem{
+    background-color: var(--background-elem-main);
+    margin: 5vh;
+    text-decoration: none;
+    color: var(--color-text);
+    font-size: 20px;
+    padding: 10px;
+}
+.active_elem{
+    background-color: var(--background-elem-main-active);
+    margin: 5vh;
+    text-decoration: none;
+    color: var(--color-text);
+    font-size: 20px;
+    padding: 10px;
+}

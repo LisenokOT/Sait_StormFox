@@ -1,0 +1,8 @@
+.menu{
+    background-color: var(--background-color-menu);
+}
+.bok_menu{
+    display: grid;
+    grid-template-rows: 20vh;  
+    height: 85vh;
+}

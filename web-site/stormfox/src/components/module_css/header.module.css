@@ -1,0 +1,83 @@
+body {
+    color: var(--color-text-header);
+    background-color: var(--background-color-header);
+    overflow: overlay;
+}
+/* ---------------------------------------------------Стили шапки-------------------------------- */
+
+.header {
+    display: grid;
+    grid-template-columns: 80vw 20vw;
+    height: 15vh;
+    overflow: overlay;
+}
+
+.header_left{
+    display: flex;
+    align-items:flex-start;
+}
+
+.header_right{
+    display: flex;
+    align-items:flex-end;
+}
+
+.logo_header{
+    z-index: 5;
+    padding: 10px;
+    font-size: 40px;
+    font-weight:10px;
+    text-decoration: none;
+    color: var(--color-text-header);
+    height: 15vh;
+}
+
+.login_href {
+    z-index: 5;
+    padding: 10px;
+    color: var(--color-text-header);
+    font-size: 25px;
+    text-decoration: none;
+    margin-left: auto;
+    height: 15vh;
+}
+
+.button {
+    z-index: 5;
+    padding: 10px;
+    color: var(--color-text-header);
+    font-size: 25px;
+    text-decoration: none;
+    margin-left: auto;
+    height: 15vh;
+    cursor: pointer;
+}
+
+.logo_header:hover, .login_href:hover, .button:hover, .setting_exit:hover{
+    z-index: 5;
+    color: var(--color-text);
+}
+
+img{
+    height: 15vh;
+} 
+
+.active_logo{
+    z-index: 5;
+    padding: 10px;
+    font-size: 40px;
+    font-weight:10px;
+    text-decoration: none; 
+    color: var(--color-text-header-active);
+    height: 15vh;
+}
+
+.active_login{
+    z-index: 5;
+    padding: 10px;
+    color: var(--color-text-header-active);
+    font-size: 25px;
+    text-decoration: none;
+    margin-left: auto;
+    height: 15vh;
+}

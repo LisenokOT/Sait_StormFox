@@ -1,0 +1,21 @@
+# Используем образ Python 3.10.0 на базе Alpine 3.15 для уменьшения размера контейнера
+FROM python:3.10.0-alpine3.15
+
+# Устанавливаем рабочую директорию
+WORKDIR /app
+
+# Устанавливаем зависимости для сборки psycopg2-binary
+RUN apk add --no-cache build-base libpq \
+    && apk add --no-cache postgresql-dev \
+    && pip install --no-cache-dir psycopg2-binary==2.9.1
+
+# Копируем файл с зависимостями
+COPY ./smm/requirements.txt .
+
+# Устанавливаем зависимости и удаляем ненужные пакеты
+RUN apk add --no-cache gcc musl-dev libffi-dev openssl-dev \
+    && pip install --no-cache-dir -r requirements.txt \
+    && apk del gcc musl-dev libffi-dev openssl-dev
+
+# Копируем все файлы из текущего каталога в контейнер
+COPY ./smm/app .

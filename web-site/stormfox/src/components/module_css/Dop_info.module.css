@@ -1,0 +1,19 @@
+.info{
+    background-color: var(--background-color-menu);
+    padding: 2vh;
+    
+} 
+.dop_info{
+    display: grid;
+    grid-template-rows: 30vh 30vh;
+    grid-gap: 2vh;
+    height: 85vh;
+}
+
+.info_1{
+    background-color: rgb(134, 134, 134);
+}
+
+.info_2{
+    background-color: rgb(134, 134, 134);
+}

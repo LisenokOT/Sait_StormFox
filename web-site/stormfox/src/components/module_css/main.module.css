@@ -1,0 +1,53 @@
+.main {
+    background-color: var(--background-color-main);
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .button {
+    background-color: var(--button-color-main);
+    color: var(--color-button-text);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin: 5px;
+  }
+  .button:hover, .addpo:hover {
+    background-color: var(--button-color-main-hover);
+  } 
+
+  .add {
+    width: 100%;
+    padding-bottom: 20px;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+  }
+  
+  .addpo {
+    background-color: var(--button-color-main);
+    color: var(--color-button-text);
+    border: none;
+    padding: 8px 16px;
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+
+
+  .elem{
+    padding: 10px;
+    font-size: 1.4rem;
+    color: var(--color-text);
+  }
+
+  .header{
+    font-size: 1.4rem;
+  }
+
+  h1{
+    color: var(--color-text);
+  }
