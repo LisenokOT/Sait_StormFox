@@ -7,7 +7,7 @@ import Main from './Main/Main';
 function App(props) {
   return (
     <BrowserRouter>
-    <Header/>
+    <Header appstate={props.appstate}/>
     <Main appstate={props.appstate} dispatch={props.dispatch}/>
     </BrowserRouter>
   );

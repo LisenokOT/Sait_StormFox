@@ -70,6 +70,7 @@ def change_status_posts(text, date, image):
 def user_registration(username, password):
     try:
         connection = open_database()
+        print(username, password)
         with connection.cursor() as cursor:
             insert_query = sql.SQL("INSERT INTO users (username, password, role) VALUES (%s, %s, %s)")
             params = (username, password, 'user')
@@ -91,7 +92,8 @@ def user_authorization(username):
             insert_query = sql.SQL("SELECT (password, role) FROM users WHERE username = %s")
             params = (username,)
             cursor.execute(insert_query, params)
-            answer = cursor.fetchall()
+            answer = cursor.fetchall()[0][0]
+            answer = answer[1:len(answer) - 1].split(",")
         connection.close()
         return None if len(answer) == 0 else answer
     except (Exception, Error) as error:

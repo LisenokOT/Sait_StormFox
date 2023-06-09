@@ -1,6 +1,7 @@
 .main {
     display: grid;
     background-color: var(--background-color-main);
+    
     height: 85vh;
     padding: 10px;
     justify-content: center;
@@ -16,6 +17,15 @@
     height: 400px;
   }
   
+  .mypage_contener {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-register-main);
+    width: 300px;
+    height: 500px;
+  }
+
   .reg_contener {
   display: flex;
   flex-direction: column;
@@ -63,6 +73,10 @@ input {
 p {
   font-size: 1.2rem;
 } 
+
+.log{
+  font-size: 3rem;
+}
 
 @media only screen and (max-width: 600px) {
   .reg_contener {

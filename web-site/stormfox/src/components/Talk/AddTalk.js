@@ -1,9 +1,7 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom'
 import {addTalkActionCreator, updateTalkCreator} from '../../redux/ReduserTalk'
 
 const Addtalk = (props) => {
-    
     let addtalk = () =>{
         props.dispatch(addTalkActionCreator());
     }
@@ -17,7 +15,7 @@ const Addtalk = (props) => {
     }
     return(
         <div>
-            <div> Введите текст поста </div>
+            <div> Введите название</div>
             <textarea onChange={onTalkChange} value={props.newTalkText} ref={newTalkElem} />
             <button onClick={ addtalk }>Опубликовать</button>
     

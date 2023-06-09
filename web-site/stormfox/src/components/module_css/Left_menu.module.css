@@ -3,6 +3,6 @@
 }
 .bok_menu{
     display: grid;
-    grid-template-rows: 20vh;  
+    grid-template-rows: 30vh;  
     height: 85vh;
 }

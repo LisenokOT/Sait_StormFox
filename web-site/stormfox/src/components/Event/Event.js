@@ -12,16 +12,29 @@ const Event_elem = (props) => {
 }
 
 const Event = (props) => {
-    let news_elem = props.eventData.EventData.map( e => <Event_elem text_event = {e.Event_text} id_elem = {e.id_elem} key = {e.id}/>)
-    
-    return(
-        <div className={main.main}>
-            <div className={main.add}>
+    const Role_change = () => {
+        if (props.role === 'admin'){
+            return(
+                <div className={main.add}>
                 <h1 className='header'>События</h1>
                 <NavLink className={main.addpost} to={'/event/addevent'}>
                     <button className={main.addpo}>Добавить событие</button>
                 </NavLink>
-            </div>
+                </div>
+            );
+        }
+        else{
+            return(
+            <div className={main.add}>
+                <h1 className='header'>События</h1>
+            </div>)
+        }
+    }
+    let news_elem = props.eventData.EventData.map( e => <Event_elem text_event = {e.Event_text} id_elem = {e.id_elem} key = {e.id}/>)
+    
+    return(
+        <div className={main.main}>
+            {Role_change()}
             <Routes>
                 <Route path='/addevent' element={<AddEvent dispatch={props.dispatch} newEventText={props.eventData.newEventText}/>}/>
             </Routes>

@@ -23,7 +23,25 @@ const PopupMenu = (props) =>{
 }
 
 const Header = (props) => {
+    
     const [ModalActive, ModalSetActive] = React.useState(false);
+    const User =()=>{
+        if (props.appstate.postgre.login === ''){
+        return(
+            <NavLink to="/autorization"
+                    className={({ isActive }) => isActive ? h.active_login : h.login_href
+                    }>Войти
+                </NavLink>
+        );}
+        else {
+            return(
+                <NavLink to="/mypage"
+                    className={({ isActive }) => isActive ? h.active_login : h.login_href
+                    }>{props.appstate.postgre.login}
+                </NavLink>
+            );
+        }
+    }
     return(
         <div className={h.header}>
             <div className={h.header_left}>
@@ -34,10 +52,8 @@ const Header = (props) => {
             </div>
             <div className={h.header_right}>
                 <div className={h.button} onClick={() => {ModalActive? ModalSetActive(false):ModalSetActive(true)}}>Настройки</div>
-                <NavLink to="/autorization"
-                    className={({ isActive }) => isActive ? h.active_login : h.login_href
-                    }>Войти
-                </NavLink>
+                {User()}
+                
                 <PopupMenu isActive={ModalActive} setActive={ModalSetActive}/>
             </div>
             

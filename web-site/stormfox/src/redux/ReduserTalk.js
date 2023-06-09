@@ -1,9 +1,9 @@
 
 let initialState = {elemData: [
-    {id_elem:1, name:'"Базы данных"'}, 
-    {id_elem:2, name:'"Модель Шеллинга"'}, 
-    {id_elem:3, name:'"Контейнеризация"'}, 
-    {id_elem:4, name:'"Виртуализация"'}
+    {id_elem:1, name:'Базы данных'}, 
+    {id_elem:2, name:'Модель Шеллинга'}, 
+    {id_elem:3, name:'Контейнеризация'}, 
+    {id_elem:4, name:'Виртуализация'}
 ],
 newTalkText:''}
 

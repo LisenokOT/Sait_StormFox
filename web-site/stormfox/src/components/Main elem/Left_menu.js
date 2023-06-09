@@ -9,7 +9,7 @@ const Bok_menu = () => {
             <Menu_key key_name = 'Новости' key_ref = 'news'/>
             <Menu_key key_name = 'События' key_ref = 'event'/>
             <Menu_key key_name = 'Обсуждения' key_ref = 'talk'/>
-            <Menu_key key_name = 'Понравилось' key_ref = 'like'/>
+            {/* <Menu_key key_name = 'Понравилось' key_ref = 'like'/> */}
             </div>
         </div>
     );

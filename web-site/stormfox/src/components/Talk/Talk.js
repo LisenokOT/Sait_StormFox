@@ -11,22 +11,26 @@ const Elem = (props) => {
             <button className={main.button}>
                 Обсуждение {props.name}</button>
             </NavLink>
-
         </div>
 
     ); 
 }
 
 const Talk = (props) => {
-    let talk_elem = props.elemData.elemData.map( e => <Elem name = {e.name} id_elem = {e.id_elem} key = {e.id}/>)
-    return(
-        <div className={main.main}>
-            <div className={main.add}>
+    const Role_change = () => {
+            return(
+                <div className={main.add}>
                 <h1>Ветки обсуждений</h1>
                 <NavLink className={main.addpost} to={'/talk/addtalk'}>
                     <button className={main.addpo}>Добавить обсуждение</button>
                 </NavLink>
             </div>
+            );
+    }
+    let talk_elem = props.elemData.elemData.map( e => <Elem name = {e.name} id_elem = {e.id_elem} key = {e.id}/>)
+    return(
+        <div className={main.main}>
+            {Role_change()}
             <Routes>
                 <Route path='/addtalk' element={<AddTalk dispatch={props.dispatch} newTalkText={props.elemData.newTalkText}/>}/>
             </Routes>

@@ -6,6 +6,7 @@ from flask import Flask, request, jsonify
 from pgsql import *
 from read_vk import read_vk
 import base64
+import requests
 
 
 app = Flask(__name__)
@@ -25,10 +26,14 @@ def startInitial():
 threadStart = Thread(target=startInitial)
 threadStart.start()
 
-@app.route('/post', methods=['GET', 'POST'])
+@app.route('/api/post', methods=['GET', 'POST', 'OPTIONS'])
 def post():
-    if request.method == 'POST':
-        text = request.form.get('text', "")
+    if request.method == 'OPTIONS':
+        status = 204
+        headers = {'Access-Control-Allow-Origin' : '*', 'Access-Control-Allow-Headers' : 'Content-Type', 'Access-Control-Allow-Methods' : 'GET,POST'}
+        return '', status, headers
+    elif request.method == 'POST':
+        text = request.args.get('text', "")
         image = request.files.get('image', None)
 
         file_info = str(image)
@@ -43,7 +48,7 @@ def post():
 
         if image is not None:
             image = image.read()
-        date_str = request.form.get('date', None)
+        date_str = request.args.get('date', None)
         if date_str is None:
             date = datetime.datetime.now()
         else:
@@ -65,7 +70,7 @@ def post():
         if not statusVK:
             error_str += '\nVK - ' + str(vk_error)
         status = 200
-        headers = {'Content-Type': 'text/plain'}
+        headers = {'Content-Type': 'application/json'}
         log(error_str)
         return error_str, status, headers
 
@@ -87,25 +92,39 @@ def post():
         headers = {'Content-Type': 'application/json'}
         return jsonify(data_dict), status, headers
 
-@app.route('/user', methods=['GET', 'POST'])
+@app.route('/api/users', methods=['GET', 'POST', 'OPTIONS'])
 def user():
-    if request.method == 'POST':
-        username = request.form.get('username', "")
-        password = request.form.get('password', "")
+    if request.method == 'OPTIONS':
+        status = 204
+        headers = {'Access-Control-Allow-Origin' : '*', 'Access-Control-Allow-Headers' : 'Content-Type', 'Access-Control-Allow-Methods' : 'GET,POST'}
+        return '', status, headers
+    elif request.method == 'POST':
+        req = request.get_json()
+        username = req.get('username', "")
+        password = req.get('password', "")
+        print('username: ', username, ' password: ', password)
         data = user_registration(username, password)
+        print(data)
         if data is None:
             data = "Error during user registration!"
         else:
             data = "The user has been successfully registered!"
         status = 200
-        headers = {'Content-Type': 'text/plain'}
+        headers = {'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : '*', 'Access-Control-Allow-Headers' : 'Content-Type', 'Access-Control-Allow-Methods' : 'GET,POST'}
         return data, status, headers
 
     elif request.method == 'GET':
-        username = request.form.get('username', "")
+        username = request.args.get('username', "")
+        password = request.args.get('password', "")
+        print('username: ', username, ' password: ', password)
         data = user_authorization(username)
+        print(data)
         if data is None or len(data) == 0:
             data = "The user does not exist"
+        elif data[0] != password:
+            data = "Wrong password"
+        else:
+            data = data[1]
         status = 200
-        headers = {'Content-Type': 'text/plain'}
-        return str(data[0]), status, headers
+        headers = {'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : '*', 'Access-Control-Allow-Headers' : 'Content-Type', 'Access-Control-Allow-Methods' : 'GET,POST'}
+        return str(data), status, headers

@@ -12,16 +12,28 @@ const News_elem = (props) => {
 }
 
 const News = (props) => {
-    
-    let news_elem = props.newsData.NewData.map( e => <News_elem text_news = {e.text_news} id_elem = {e.id_elem} key = {e.id}/>)
-    return(
-        <div className={main.main}>
-            <div className={main.add}>
+    const Role_change = () => {
+        if (props.role === 'admin'){
+            return(
+                <div className={main.add}>
                 <h1>Новости</h1>
                 <NavLink className={main.addpost} to={'/news/addnews'}>
                     <button className={main.addpo}>Добавить новость</button>
                 </NavLink>
             </div>
+            );
+        }
+        else{
+            return(
+            <div className={main.add}>
+                <h1>Новости</h1>
+            </div>)
+        }
+    }
+    let news_elem = props.newsData.NewData.map( e => <News_elem text_news = {e.text_news} id_elem = {e.id_elem} key = {e.id}/>)
+    return(
+        <div className={main.main}>
+            {Role_change()}
             <Routes>
                 <Route path='/addnews' element={<AddNews dispatch={props.dispatch} newNewsText={props.newsData.newNewsText}/>}/>
             </Routes>

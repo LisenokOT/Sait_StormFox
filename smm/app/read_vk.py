@@ -18,7 +18,6 @@ def read_vk():
             response = vk.wall.get(access_token=token, owner_id=group_id, count=100, offset=len(posts))
             posts.extend(response['items'])
 
-
         for post in posts:
             post_id = post['id']
             text = post['text']
